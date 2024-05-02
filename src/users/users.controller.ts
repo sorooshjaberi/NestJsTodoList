@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
+import { Public } from 'src/auth/auth.public';
 import { CreateUserDto } from 'src/users/dtos/create-user.dto';
 import { UpdateUserDto } from 'src/users/dtos/update-user.dto';
 import { User } from 'src/users/entities/users.entity';
@@ -20,6 +21,7 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
+  @Public()
   @Post()
   create(@Body() newUser: CreateUserDto) {
     return this.usersService.createUser(newUser);
