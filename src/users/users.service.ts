@@ -23,6 +23,18 @@ export class UsersService {
     return user;
   }
 
+  async findOneBy(findBy: Partial<User>) {
+    const user = await this.userRepository.findOneBy({
+      ...findBy,
+    });
+
+    if (!user) {
+      throw new NotFoundException(`There's no such user`);
+    }
+
+    return user;
+  }
+
   createUser(newUser: CreateUserDto) {
     const createdUser = this.userRepository.create(newUser);
     return this.userRepository.save(createdUser);

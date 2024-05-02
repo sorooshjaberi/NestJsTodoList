@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -18,8 +21,15 @@ import { UsersModule } from './users/users.module';
     }),
     TodosModule,
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      useClass: AuthGuard,
+      provide: APP_GUARD,
+    },
+  ],
 })
 export class AppModule {}
