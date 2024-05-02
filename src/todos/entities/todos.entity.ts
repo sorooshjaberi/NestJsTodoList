@@ -1,8 +1,9 @@
+import { WithDate } from 'src/common/entities/withDate.entity';
 import { User } from 'src/users/entities/users.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Todo {
+export class Todo extends WithDate {
   @PrimaryGeneratedColumn()
   id: number;
 
