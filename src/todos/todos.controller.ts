@@ -7,7 +7,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Todo } from 'src/todos/entities/todos.entity';
+import { CreateTodoDto } from 'src/todos/dtos/create-todo.dto';
+import { UpdateTodoDto } from 'src/todos/dtos/update-todo.dto';
 import { TodosService } from 'src/todos/todos.service';
 
 @Controller('todos')
@@ -24,12 +25,12 @@ export class TodosController {
   }
 
   @Post()
-  createTodo(@Body() createdTodo: Todo) {
+  createTodo(@Body() createdTodo: CreateTodoDto) {
     this.todosService.create(createdTodo);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() updatedTodo: Partial<Todo>) {
+  async update(@Param('id') id: number, @Body() updatedTodo: UpdateTodoDto) {
     await this.todosService.update(id, updatedTodo);
   }
 

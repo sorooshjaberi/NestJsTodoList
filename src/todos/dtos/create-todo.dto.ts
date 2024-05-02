@@ -6,7 +6,7 @@ export class CreateTodoDto {
 
   @IsString()
   @IsOptional()
-  readonly desciption: string;
+  readonly description: string;
 
   @IsBoolean()
   @IsOptional()

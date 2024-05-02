@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateTodoDto } from 'src/todos/dtos/create-todo.dto';
+import { UpdateTodoDto } from 'src/todos/dtos/update-todo.dto';
 import { Todo } from 'src/todos/entities/todos.entity';
 import { Repository } from 'typeorm';
 
@@ -21,12 +23,12 @@ export class TodosService {
     return todo;
   }
 
-  create(newTodo: Todo) {
+  create(newTodo: CreateTodoDto) {
     const todo = this.todoRepository.create(newTodo);
     return this.todoRepository.save(todo);
   }
 
-  async update(id: number, newVersion: Partial<Todo>) {
+  async update(id: number, newVersion: UpdateTodoDto) {
     const todo = await this.todoRepository.preload({ id: +id, ...newVersion });
 
     if (!todo) {
