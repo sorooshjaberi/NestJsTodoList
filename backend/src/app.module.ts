@@ -33,7 +33,6 @@ import configurations, {
         autoLoadEntities: true,
         synchronize: true,
       }),
-      imports: [ConfigModule],
       inject: [ConfigService],
     }),
     TodosModule,
