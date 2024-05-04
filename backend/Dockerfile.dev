@@ -1,0 +1,19 @@
+FROM node:20
+
+WORKDIR /app
+
+COPY ./package.json ./pnpm-lock.yaml /app/
+
+# Add wait-for-it
+COPY ./wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+
+RUN corepack enable
+
+RUN pnpm install
+
+COPY . /app/
+
+EXPOSE 3000
+
+ENTRYPOINT [ "sh", "-c", "/wait-for-it.sh db:5432 -- pnpm start:dev" ]
