@@ -1,27 +1,30 @@
-  version: "3.8"
-  services:
-    db:
-      image: postgres
-      ports:
-        - "5432:5432"
-      environment:
-        POSTGRES_PASSWORD: 1
-        POSTGRES_USER: todolist
-        POSTGRES_DB: todolist
-    backend:
-      build:
-        context: ./backend
-        dockerfile: ./Dockerfile.dev
-      ports:
-        - "3000:3000"
-      volumes:
-        - ./backend:/app
-    frontend:
-      build:
-        context: ./frontend
-        dockerfile: ./Dockerfile.dev
-      ports:
-        - "5173:5173"
-      volumes:
-        - ./frontend:/app
-      
+version: "3.8"
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: 1
+      POSTGRES_USER: todolist
+      POSTGRES_DB: todolist
+    volumes:
+      - db:/var/lib/postgresql
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+volumes:
+  db:
