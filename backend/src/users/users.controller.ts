@@ -37,7 +37,7 @@ export class UsersController {
   }
 
   @Public()
-  @Post()
+  @Post('signup')
   create(@Body() newUser: CreateUserDto) {
     return this.usersService.createUser(newUser);
   }
