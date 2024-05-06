@@ -1,12 +1,12 @@
+import Form from "@/components/signup/Form";
+import Heading from "@/components/signup/Heading";
+import Center from "@/components/ui/Center";
 import HStack from "@/components/ui/HStack";
 import Image from "@/components/ui/Image";
-import backgroundImage from "@/assets/images/login-background3.jpg";
-import Center from "@/components/ui/Center";
-import Heading from "@/components/login/Heading";
 import shadows from "@mui/material/styles/shadows";
-import Form from "@/components/login/Form";
+import backgroundImage from "@/assets/images/login-background3.jpg";
 
-const Login = () => {
+const Signup = () => {
   return (
     <HStack
       overflow="hidden"
@@ -29,4 +29,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
