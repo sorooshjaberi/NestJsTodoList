@@ -4,6 +4,7 @@ import { FC } from "react";
 import { Outlet } from "react-router-dom";
 import ThemeProvider from "./theme.provider";
 import ToastProvider from "@/providers/toast.provider";
+import RootLayout from "@/components/layout/RootLayout";
 
 const AppProvider: FC = () => {
   return (
@@ -12,7 +13,9 @@ const AppProvider: FC = () => {
         <QueryProvider>
           <ThemeProvider>
             <ToastProvider>
-              <Outlet />
+              <RootLayout>
+                <Outlet />
+              </RootLayout>
             </ToastProvider>
           </ThemeProvider>
         </QueryProvider>

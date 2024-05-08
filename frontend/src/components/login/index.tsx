@@ -1,29 +1,28 @@
 import HStack from "@/components/ui/HStack";
-import Image from "@/components/ui/Image";
 import backgroundImage from "@/assets/images/login-background3.jpg";
 import Center from "@/components/ui/Center";
 import Heading from "@/components/login/Heading";
-import shadows from "@mui/material/styles/shadows";
 import Form from "@/components/login/Form";
+import { Box } from "@mui/material";
 
 const Login = () => {
   return (
     <HStack
-      overflow="hidden"
-      height="100dvh"
+      sx={{ overflowX: "hidden" }}
       justifyContent="space-between"
-      boxShadow={shadows[24]}
+      height="100%"
     >
-      <Center minWidth="450px" gap={2} px={5} alignItems="flex-start">
+      <Center mx="auto" width="450px" gap={2} px={5} alignItems="flex-start">
         <Heading />
         <Form />
       </Center>
 
-      <Image
-        src={backgroundImage}
-        alt="background"
-        width="1200px"
-        height="100%"
+      <Box
+        flex="1"
+        sx={{
+          backgroundSize: "cover",
+          backgroundImage: `url(${backgroundImage})`,
+        }}
       />
     </HStack>
   );

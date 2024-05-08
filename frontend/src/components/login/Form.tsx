@@ -30,7 +30,6 @@ const Form = () => {
     <Stack width="100%" gap={5} component="form" onSubmit={formik.handleSubmit}>
       <Stack gap={2}>
         <TextFieldWithFormik
-          variant="outlined"
           label={
             <LabelPrimary component="label" htmlFor="username">
               Username
