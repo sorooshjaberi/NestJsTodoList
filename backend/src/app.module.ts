@@ -6,11 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configurations, {
   EnvironmentVariables,
 } from 'src/config/configurations';
+import { WithStackFilterTsFilter } from 'src/common/filters/with-stack.filter.ts/with-stack.filter.ts.filter';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import configurations, {
       useFactory: (
         configService: ConfigService<Readonly<EnvironmentVariables>, true>,
       ) => ({
-        port: configService.get<number>('database.port', { infer: true }),
+        port: configService.get('database.port', { infer: true }),
         host: configService.get('database.host', { infer: true }),
         type: 'postgres',
         database: 'todolist',
@@ -45,6 +46,10 @@ import configurations, {
     {
       useClass: AuthGuard,
       provide: APP_GUARD,
+    },
+    {
+      useClass: WithStackFilterTsFilter,
+      provide: APP_FILTER,
     },
   ],
 })
