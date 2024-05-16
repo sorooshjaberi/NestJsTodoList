@@ -19,7 +19,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
           navigate("/login");
         }
 
-        return error;
+        return Promise.reject(error);
       }
     );
   }, []);

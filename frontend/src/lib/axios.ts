@@ -11,19 +11,4 @@ axiosInstance.interceptors.request.use((request) => {
   return request;
 });
 
-// axiosInstance.interceptors.response.use(
-//   (res) => res,
-
-//   (error: AxiosError) => {
-//     const statusCode = get(error, ["response", "status"]) as number;
-//     const isUnAuthorized = statusCode === 401;
-
-//     if (isUnAuthorized) {
-//       set(window, ["location", "href"], "/login");
-//     }
-
-//     return error;
-//   }
-// );
-
 export default axiosInstance;
