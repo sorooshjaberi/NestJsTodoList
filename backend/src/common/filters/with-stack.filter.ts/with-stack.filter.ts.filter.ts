@@ -18,6 +18,8 @@ export class WithStackFilterTsFilter<T extends HttpException>
     // nest message
     const errorResponse = exception.getResponse();
 
+    const statusCode = exception.getStatus();
+
     let error: object;
 
     if (isString(errorResponse)) {
@@ -32,6 +34,6 @@ export class WithStackFilterTsFilter<T extends HttpException>
 
     set(error, 'stack', get(exception, ['stack']));
 
-    httpResponse.json(error);
+    httpResponse.status(statusCode).json(error);
   }
 }
