@@ -1,4 +1,9 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
@@ -6,14 +11,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuard } from 'src/auth/auth.guard';
-import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configurations, {
   EnvironmentVariables,
 } from 'src/config/configurations';
 import { WithStackFilterTsFilter } from 'src/common/filters/with-stack.filter.ts/with-stack.filter.ts.filter';
-import { ResponseWrapperInterceptor } from 'src/common/interceptors/response-wrapper/response-wrapper.interceptor';
 import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
+import { LoggerMiddleware } from 'src/common/middlewares/logger/logger.middleware';
 
 @Module({
   imports: [
@@ -54,10 +59,6 @@ import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
       provide: APP_FILTER,
     },
     {
-      useClass: ResponseWrapperInterceptor,
-      provide: APP_INTERCEPTOR,
-    },
-    {
       useValue: new ValidationPipe({
         whitelist: true,
         forbidNonWhitelisted: true,
@@ -71,4 +72,8 @@ import { ParseIntPipe } from 'src/common/pipes/parse-int/parse-int.pipe';
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

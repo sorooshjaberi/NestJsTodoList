@@ -1,11 +1,19 @@
-import axiosInstance from "@/lib/axios";
-import { useEffect } from "react";
+import useTodos from "@/hooks/useTodos";
+import { Stack, Typography } from "@mui/material";
+import { map } from "lodash";
 
 const Home = () => {
-  useEffect(() => {
-    axiosInstance.get("todos");
-  }, []);
-  return <>Home</>;
+  const { data } = useTodos();
+  return (
+    <>
+      {map(data?.data, ({ title, description }) => (
+        <Stack>
+          <Typography>{title}</Typography>
+          <Typography>{description}</Typography>
+        </Stack>
+      ))}
+    </>
+  );
 };
 
 export default Home;

@@ -10,3 +10,5 @@ export type SingleKeyValuePair<K extends string | number | symbol, V> = {
 };
 
 export type Primitive = string | number | boolean;
+
+export type Nullable<T> = T | null;
