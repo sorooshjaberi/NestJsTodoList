@@ -1,5 +1,4 @@
-import LabelPrimary from "@/components/ui/Inputs/Labels/LabelPrimary";
-import TextFieldWithFormik from "@/components/ui/Inputs/TexFields/TextFieldWithFormik";
+import { LabelPrimary, TextFieldWithFormik } from "formik-mui-inputs";
 import { Box, Button, IconButton, Stack } from "@mui/material";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { useFormik } from "formik";

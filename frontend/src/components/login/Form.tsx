@@ -1,5 +1,3 @@
-import LabelPrimary from "@/components/ui/Inputs/Labels/LabelPrimary";
-import TextFieldWithFormik from "@/components/ui/Inputs/TexFields/TextFieldWithFormik";
 import { Box, Button, IconButton, Stack } from "@mui/material";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { useFormik } from "formik";
@@ -7,7 +5,7 @@ import { object, string } from "yup";
 import { useState } from "react";
 import useLogin from "@/hooks/useLogin";
 import { Link } from "react-router-dom";
-
+import { TextFieldWithFormik, LabelPrimary } from "formik-mui-inputs";
 const Form = () => {
   const [showPassword, setShowPassword] = useState(false);
 
