@@ -10,12 +10,15 @@ import { Request } from 'express';
 import { get } from 'lodash';
 import { IS_PUBLIC_KEY } from 'src/auth/auth.public';
 import { jwtConstants } from 'src/auth/constants';
+import { User } from 'src/users/entities/users.entity';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private jwtService: JwtService,
     private reflector: Reflector,
+    private usersService: UsersService,
   ) {}
 
   async canActivate(context: ExecutionContext) {
@@ -35,7 +38,11 @@ export class AuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       });
-      request['user'] = payload;
+
+      const username = get(payload, ['username']) as User['username'];
+      const user = await this.usersService.findOneBy({ username });
+
+      request['user'] = user;
     } catch {
       throw new UnauthorizedException();
     }

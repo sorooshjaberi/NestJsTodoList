@@ -13,15 +13,10 @@ import { get, set } from 'lodash';
 import { CreateTodoDto } from 'src/todos/dtos/create-todo.dto';
 import { UpdateTodoDto } from 'src/todos/dtos/update-todo.dto';
 import { TodosService } from 'src/todos/todos.service';
-import { User } from 'src/users/entities/users.entity';
-import { UsersService } from 'src/users/users.service';
 
 @Controller('todos')
 export class TodosController {
-  constructor(
-    private todosService: TodosService,
-    private usersService: UsersService,
-  ) {}
+  constructor(private todosService: TodosService) {}
 
   @Get()
   findAll() {
@@ -37,10 +32,7 @@ export class TodosController {
     @Body() createdTodo: CreateTodoDto,
     @Req() request: Request,
   ) {
-    const username = get(request, ['user', 'username']) as User['username'];
-    const user = await this.usersService.findOneBy({ username });
-
-    set(createdTodo, ['user'], user);
+    set(createdTodo, ['user'], get(request, 'user'));
 
     return this.todosService.create(createdTodo);
   }
