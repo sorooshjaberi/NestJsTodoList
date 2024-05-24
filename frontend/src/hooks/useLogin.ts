@@ -20,13 +20,8 @@ const useLogin = () => {
       navigate("/");
     },
     onError(error: AxiosError) {
-      const errorData = get(error as AxiosError, ["response", "data"]);
-      const statusCode = get(errorData, ["statusCode"]);
-      const message = get(errorData, ["message"]);
-
-      if (statusCode === 404) {
-        toast.error("Wrong username");
-      } else {
+      if (error instanceof AxiosError) {
+        const message = get(error, ["response", "data", "message"]);
         toast.error(message);
       }
     },

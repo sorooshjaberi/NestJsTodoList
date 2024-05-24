@@ -55,6 +55,7 @@ const Navbar = (props: Props) => {
     <HStack
       bgcolor="white"
       position="sticky"
+      alignItems="center"
       top={showNavbar ? "0" : "-100px"}
       gap={2}
       px={2}

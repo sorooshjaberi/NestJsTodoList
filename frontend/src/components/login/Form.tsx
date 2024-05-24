@@ -25,7 +25,12 @@ const Form = () => {
     },
   });
   return (
-    <Stack width="100%" gap={5} component="form" onSubmit={formik.handleSubmit}>
+    <Stack
+      width="300px"
+      gap={5}
+      component="form"
+      onSubmit={formik.handleSubmit}
+    >
       <Stack gap={2}>
         <TextFieldWithFormik
           label={
