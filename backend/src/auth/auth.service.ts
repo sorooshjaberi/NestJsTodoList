@@ -15,7 +15,7 @@ export class AuthService {
       username,
     });
     if (user.password !== password) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Wrong username or password');
     }
 
     const jwt = await this.jwtService.signAsync({
